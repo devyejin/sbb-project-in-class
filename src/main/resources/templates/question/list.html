@@ -1,0 +1,24 @@
+<html layout:decorate="~{/layout/layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
+<div class="container my-3" layout:fragment="content">
+    <table class="table">
+        <thead class="table-dark">
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="question, loop : ${questionList}"> <!-- loop는 타임리프 지원 객체 loop.count : 반복 순서, 1부터 1씩 증가-->
+            <td th:text="${loop.count}">글 번호, 루프객체로 자동 증가</td>
+            <td>
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}">질문 제목</a>
+            </td>
+            <td th:text="${#temporals.format(question.createDate,'yyyy-MM-dd HH:mm')}">질문 작성일</td>
+            <!-- #temporals. 타임리프 유틸리티 객체 -->
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+</div>
+</html>
